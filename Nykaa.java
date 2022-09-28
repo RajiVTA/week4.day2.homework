@@ -93,7 +93,7 @@ public class Nykaa {
 		
 		//11) Print the MRP of the product
 		String mrp = driver.findElement(By.xpath("//span[@class='css-1jczs19']")).getText();
-		System.out.println("MRP is :" +mrp);
+		System.out.println("MRP is :" +mrp.replaceAll("[^0-9]",""));
 		
 		
 		//12) Click on ADD to BAG
@@ -109,7 +109,7 @@ public class Nykaa {
 		String grandTotal = driver.findElement(By.xpath("//div[@class='value medium-strong']")).getText();
 		
 	
-		System.out.println("Grand Total  :" +grandTotal);
+		System.out.println("Grand Total  :" +grandTotal.replaceAll("[^0-9]",""));
 		
 		//15) Click Proceed
 	
@@ -122,7 +122,7 @@ public class Nykaa {
 		
 		//17) Check if this grand total is the same in step 14
 		String verifyTotal = driver.findElement(By.xpath("(//div[@class='value'])[2]")).getText();
-		System.out.println("Verify total in checkout page : "+verifyTotal);
+		System.out.println("Verify total in checkout page : "+verifyTotal.replaceAll("[^0-9]",""));
 		
 		if(grandTotal.equals(verifyTotal))
 			System.out.println("Grand Total is same");
