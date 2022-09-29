@@ -1,9 +1,14 @@
 package week4.day2.homework;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -37,29 +42,48 @@ public class ChittorgarhWebTable {
 		int rowSize = row.size();
 		System.out.println("Total number of rows :"+rowSize);
 		
+	
 		Thread.sleep(4000);
 		driver.findElement(By.xpath("//flashcard-close[@role='button']")).click();
 
-		for(int i=1;i<rowSize;i++)
+		System.out.println("SECURITY NAMES IN WEB TABLE");
+		ArrayList<String> row1 = new ArrayList<String>();
+		for(int i=2;i<rowSize;i++)
 		{
 			
 			String securityValue = driver.findElement(By.xpath("//table[@class='table table-bordered table-condensed table-striped']//tr[" + i +"]/td[3]")).getText();	
 		
 			System.out.println(securityValue);
+			row1.add(securityValue);
 		}
-		
+	
+				
 		//5. Ensure whether there are duplicate Security names
+		System.out.println();
+		System.out.println("DUPLICATE SECURITY NAMES :");
+		boolean flag=false;
+		int size5 = row1.size();
+		System.out.println(row1.size());
 		
-		Set<String>Security=new LinkedHashSet<String>();
-		for(String s:Security)
+		for (int j=0;j<size5;j++) 
 		{
-			Security.add(s);
+		    for (int k=j+1;k<size5;k++)
+		    {
+		        if (row1.get(k).equals(row1.get(j)))
+		        { 
+		        	System.out.println(row1.get(k));
+		        	System.out.println(row1.get(j));
+		        	 flag=true;
+		        	 break;
+		           
+		        }
+		    }
 		}
-		int securitySize=Security.size();
-		if(rowSize==securitySize)
-			System.out.println("No duplicates present");
+		if(flag==true)
+			System.out.println(" Duplicates are present");
 		else
-			System.out.println("Duplicates are present");
+			System.out.println("No duplicates present");
+	
 	}
 
 }
